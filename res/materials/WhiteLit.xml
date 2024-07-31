@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Material name="WhiteLit" shader="FlatColorLit">
+
+  <Uniform name="Color"             type="numeric"  dataType="float" count="3">1.0, 1.0, 1.0</Uniform>
+  <Uniform name="ShineDamper"       type="numeric"  dataType="float" count="1">10.0</Uniform>
+  <Uniform name="Reflectivity"      type="numeric"  dataType="float" count="1">0.5</Uniform>
+  <Uniform name="AmbientLightLevel" type="numeric"  dataType="float" count="1">0.2</Uniform>
+
+</Material>

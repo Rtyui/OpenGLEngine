@@ -1,0 +1,44 @@
+#pragma once
+#include <vector>
+
+#include "entities/Camera.h"
+#include "Light.h"
+#include "entities/Entity.h"
+#include "rendering/Renderer.h"
+
+class Scene
+{
+private:
+    static Scene* s_CurrentScene;
+
+    std::string m_Name;
+    Camera* m_Camera;
+    Light* m_Light;
+
+    std::vector<Entity*> m_Entities;
+
+public:
+
+    Scene();
+    ~Scene();
+
+    void Load();
+    void Unload(Renderer* renderer);
+
+    void Update();
+
+    Entity* GetEntity(const std::string& name);
+
+    static Scene* CreateFromXMLFile(const std::string& name, const std::string& filePath);
+    
+    
+    inline static Scene* GetCurrentScene() { return s_CurrentScene; }
+
+private:
+
+    static void LoadXMLEntity(Scene* scene, const pugi::xml_node& node);
+    static void LoadXMLLight(Scene* scene, const pugi::xml_node& node);
+    static void LoadXMLCamera(Scene* scene, const pugi::xml_node& node);
+
+};
+
