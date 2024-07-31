@@ -30,8 +30,8 @@ public:
     Entity* GetEntity(const std::string& name);
 
     static Scene* CreateFromXMLFile(const std::string& name, const std::string& filePath);
-    
-    
+
+    inline const std::string& GetName() { return m_Name; }
     inline static Scene* GetCurrentScene() { return s_CurrentScene; }
 
 private:

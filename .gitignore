@@ -1,1 +1,8 @@
 .vs/*
+*.obj
+*.tlog
+*.ilk
+*.pdb
+*.idb
+*.exe
+*.log

@@ -7,6 +7,7 @@
 #include "rendering/Renderer.h"
 #include "interface/events/KeyEvent.h"
 #include "interface/Debug.h"
+#include "interface/ConsoleCommands.h"
 
 const unsigned Console::NUM_ROWS = 30;
 Console* Console:: s_Console = nullptr;
@@ -54,7 +55,8 @@ void Console::HandleEvent(KeyEvent* keyEvent)
     if ((keyEvent->GetKey() == GLFW_KEY_ENTER) && (keyEvent->GetAction() == GLFW_PRESS) && !keyEvent->GetMods())
     {
         TextRender* textRender = m_InputRow->GetComponent<TextRender>();
-        PushLine(textRender->GetText());
+        //PushLine(textRender->GetText());
+        ConsoleCommands::ExecuteCommand(textRender->GetText());
         textRender->SetText("");
     }
 }

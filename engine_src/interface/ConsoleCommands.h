@@ -20,5 +20,9 @@ private:
 
 public:
 
-    static void PrintCaca(void);
+    static void ExecuteCommand(const std::string& command);
+
+    static void PrintScene(void);
+
+    static void UnknownCommandAction(void);
 };
