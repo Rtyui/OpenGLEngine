@@ -19,6 +19,8 @@ public:
     void IncreasePosition(glm::vec2 delta) override;
     void IncreaseRotation(float delta) override;
 
+    virtual bool IsScreenPointOn(glm::vec2 position) { return false; };
+
     static Component* CreateFromXMLNode(const pugi::xml_node& node, Entity* entity);
 
 private:

@@ -7,6 +7,7 @@
 class KeyEvent;
 class CharEvent;
 class MouseButtonEvent;
+class WindowSizeEvent;
 
 class EventListener
 {
@@ -20,5 +21,6 @@ public:
     virtual void HandleEvent(KeyEvent* keyEvent) {};
     virtual void HandleEvent(CharEvent* charEvent) {};
     virtual void HandleEvent(MouseButtonEvent* mouseButtonEvent) {};
+    virtual void HandleEvent(WindowSizeEvent* windowResizeEvent) {};
 };
 

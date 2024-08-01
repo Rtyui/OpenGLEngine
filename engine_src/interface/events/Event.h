@@ -12,7 +12,8 @@ public:
     {
         KeyEvent,
         CharEvent,
-        MouseButtonEvent
+        MouseButtonEvent,
+        WindowSizeEvent
     };
 
 protected:

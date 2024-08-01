@@ -33,7 +33,8 @@ Camera::~Camera()
 
 void Camera::Update()
 {
-    Move();
+    //Move();
+    UpdateViewMatrix(true);
 }
 
 Camera* Camera::CreateFromXMLNode(const pugi::xml_node& node)

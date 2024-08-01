@@ -4,6 +4,7 @@
 #include "interface/events/KeyEvent.h"
 #include "interface/events/CharEvent.h"
 #include "interface/events/MouseButtonEvent.h"
+#include "interface/events/WindowSizeEvent.h"
 
 Input* Input::s_Input = nullptr;
 
@@ -12,6 +13,7 @@ Input::Input()
     glfwSetKeyCallback(Display::Singleton()->GetWindow(), KeyCallback);
     glfwSetCharCallback(Display::Singleton()->GetWindow(), CharCallback);
     glfwSetMouseButtonCallback(Display::Singleton()->GetWindow(), MouseButtonCallback);
+    glfwSetWindowSizeCallback(Display::Singleton()->GetWindow(), WindowSizeCallback);
 }
 
 Input* Input::Singleton()
@@ -70,4 +72,9 @@ void Input::CharCallback(GLFWwindow* window, unsigned int codepoint)
 void Input::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     EventsManager::Singleton()->RegisterEvent(new MouseButtonEvent(button, action, mods));
+}
+
+void Input::WindowSizeCallback(GLFWwindow* window, int width, int height)
+{
+    EventsManager::Singleton()->RegisterEvent(new WindowSizeEvent(width, height));
 }

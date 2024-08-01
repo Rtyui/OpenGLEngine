@@ -15,10 +15,10 @@ private:
 
 public:
 
-    inline const int& GetKey() { return m_Key; }
-    inline const int& GetScancode() { return m_Scancode; }
-    inline const int& GetAction() { return m_Action; }
-    inline const int& GetMods() { return m_Mods; }
+    inline const int& GetKey() const { return m_Key; }
+    inline const int& GetScancode() const { return m_Scancode; }
+    inline const int& GetAction() const { return m_Action; }
+    inline const int& GetMods() const { return m_Mods; }
 
     virtual void GetHandled(EventListener* eventListener) override;
 

@@ -20,6 +20,8 @@ public:
     virtual void IncreasePosition(glm::vec2 delta) = 0;
     virtual void IncreaseRotation(float delta) = 0;
 
+    virtual bool IsScreenPointOn(glm::vec2 position) = 0;
+
     inline const glm::mat4 GetTransformationMatrix() const { return m_TransformationMatrix; }
     inline const glm::mat4 GetNoScaleTM() const { return m_NoScaleTM; }
 

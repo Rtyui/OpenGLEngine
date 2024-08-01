@@ -1,5 +1,6 @@
 #include "interface/Display.h"
 #include "interface/Debug.h"
+#include "interface/events/WindowSizeEvent.h"
 
 Display* Display::s_Display = nullptr;
 
@@ -12,8 +13,9 @@ void Display::Destroy()
     delete s_Display;
 }
 
-Display::Display()
-    : m_Width(1920), m_Height(1080)
+Display::Display() :
+    EventListener(Event::EventType::WindowSizeEvent), m_Width(1920), m_Height(1080),
+    m_OriginalWidth(1920), m_OriginalHeight(1080), m_WidthScale(1.f), m_HeightScale(1.f)
 {
     if (!glfwInit())
     {
@@ -70,4 +72,14 @@ void Display::Update() const
 {
     glfwSwapBuffers(m_Window);
     glfwPollEvents();
+}
+
+void Display::HandleEvent(WindowSizeEvent* event)
+{
+    m_Width = event->GetWidth();
+    m_Height = event->GetHeight();
+    m_WidthScale = (float)m_Width / m_OriginalWidth;
+    m_HeightScale = (float)m_Height / m_OriginalHeight;
+    //glViewport(0, 0, m_Width, m_Height);
+    Debug::Log(Debug::DebugLevel::Info, "WidthScale " + std::to_string(m_WidthScale) + " " + "HeightScale " + std::to_string(m_HeightScale));
 }

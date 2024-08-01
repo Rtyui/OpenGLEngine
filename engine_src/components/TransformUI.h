@@ -16,6 +16,8 @@ public:
     void IncreasePosition(glm::vec2 delta) override;
     void IncreaseRotation(float delta) override;
 
+    bool IsScreenPointOn(glm::vec2 position) override;
+
     inline const glm::vec2& GetPosition() const { return m_Position; }
     inline const glm::vec2& GetSize() const { return m_Size; }
 

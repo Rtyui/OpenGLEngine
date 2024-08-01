@@ -129,18 +129,9 @@ void TextRender::HandleEvent(MouseButtonEvent* mouseButtonEvent)
     glm::vec2 mousePosition = (glm::vec2)Input::Singleton()->GetMousePosition();
 
     TransformUI* transform = static_cast<TransformUI*>(m_Entity->GetTransform());
-    glm::vec2 myPosition = transform->GetPosition();
 
-    glm::vec2 mySize = transform->GetSize();
-    if ((mousePosition.x >= myPosition.x) && (mousePosition.x <= (myPosition.x + mySize.x)) &&
-        (mousePosition.y >= myPosition.y) && (mousePosition.y <= (myPosition.y + mySize.y)))
-    {
-        SetSelected(true);
-    }
-    else
-    {
-        SetSelected(false);
-    }
+    SetSelected(transform->IsScreenPointOn(mousePosition));
+    Debug::Log(Debug::DebugLevel::Info, "click at " + std::to_string(mousePosition.x) + " " + std::to_string(mousePosition.y));
 }
 
 void TextRender::GetSubmitted()

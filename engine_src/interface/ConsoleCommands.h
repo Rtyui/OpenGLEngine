@@ -10,13 +10,13 @@ class ConsoleCommands
 public:
     struct ConsoleCommand
     {
-        const std::string   m_commandName;
-        CommandFunc         m_func;
+        const std::string   m_CommandName;
+        CommandFunc         m_Func;
     };
 
 private:
 
-    static std::vector<ConsoleCommand>      s_consoleCommands;
+    static std::vector<ConsoleCommand>      s_ConsoleCommands;
 
 public:
 

@@ -10,7 +10,7 @@ private:
 
 public:
 
-    inline const int& GetCodepoint() { return m_Codepoint; }
+    inline const int& GetCodepoint() const { return m_Codepoint; }
 
     virtual void GetHandled(EventListener* eventListener) override;
 

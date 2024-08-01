@@ -2,17 +2,17 @@
 #include "interface/Debug.h"
 #include "entities/Scene.h"
 
-std::vector<ConsoleCommands::ConsoleCommand> ConsoleCommands::s_consoleCommands = {
+std::vector<ConsoleCommands::ConsoleCommand> ConsoleCommands::s_ConsoleCommands = {
     { "print scene", ConsoleCommands::PrintScene }
 };
 
 void ConsoleCommands::ExecuteCommand(const std::string& command)
 {
-    for (ConsoleCommand consoleCommand : ConsoleCommands::s_consoleCommands)
+    for (ConsoleCommand consoleCommand : ConsoleCommands::s_ConsoleCommands)
     {
-        if (!command.compare(0, consoleCommand.m_commandName.length(), consoleCommand.m_commandName))
+        if (!command.compare(0, consoleCommand.m_CommandName.length(), consoleCommand.m_CommandName))
         {
-            consoleCommand.m_func();
+            consoleCommand.m_Func();
             return;
         }
     }

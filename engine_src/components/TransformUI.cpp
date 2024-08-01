@@ -1,6 +1,7 @@
 #include "components/TransformUI.h"
 #include "interface/Debug.h"
 #include "entities/Entity.h"
+#include "interface/Display.h"
 
 #include <vendor/glm/gtc/matrix_transform.hpp>
 
@@ -51,6 +52,12 @@ void TransformUI::IncreaseRotation(float delta)
     {
         UpdateTransformationMatrix();
     }
+}
+
+bool TransformUI::IsScreenPointOn(glm::vec2 position)
+{
+    return (position.x >= m_Position.x) && (position.x <= (m_Position.x + m_Size.x)) &&
+        (position.y >= m_Position.y) && (position.y <= (m_Position.y + m_Size.y));
 }
 
 
