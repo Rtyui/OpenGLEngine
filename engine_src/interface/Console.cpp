@@ -120,6 +120,13 @@ void Console::PushLine(const std::string& text, const glm::vec3 color)
 {
     TransformUI* transform = nullptr;
     TextRender* textRender = nullptr;
+
+    if (text.find('\n') != std::string::npos)
+    {
+        Debug::Log(Debug::DebugLevel::Warning, "Console debug with newline not implemented yet!");
+        return;
+    }
+
     for (Entity* entity : m_Rows)
     {
         transform = entity->GetComponent<TransformUI>();
@@ -128,11 +135,11 @@ void Console::PushLine(const std::string& text, const glm::vec3 color)
             textRender = entity->GetComponent<TextRender>();
             textRender->SetText(text);
             textRender->SetColor(color);
-            transform->IncreasePosition(glm::vec2(0.f, m_RowHeight * (NUM_ROWS - 2)));
+            transform->IncreasePosition(glm::vec3(0.f, m_RowHeight * (NUM_ROWS - 2), 0.f));
         }
         else
         {
-            transform->IncreasePosition(glm::vec2(0.f, -m_RowHeight));
+            transform->IncreasePosition(glm::vec3(0.f, -m_RowHeight, 0.f));
         }
     }
 }
@@ -152,10 +159,10 @@ void Console::CreateTextRows()
         entity = Entity::Create(name);
         m_Rows.push_back(entity);
 
-        transformUI = static_cast<TransformUI*>(TransformUI::Create(glm::vec2(0.f, i * m_RowHeight), 0.f, glm::vec2(displayWidth, m_RowHeight)));
+        transformUI = static_cast<TransformUI*>(TransformUI::Create(glm::vec3(0.f, i * m_RowHeight, 0.f), 0.f, glm::vec3(displayWidth, m_RowHeight, 1.f)));
         entity->AddComponent(transformUI);
 
-        textRender = static_cast<TextRender*>(TextRender::Create(m_Font, 0, glm::vec3(1.f, 1.f, 1.f), false, false, transformUI->GetSize(), name));
+        textRender = static_cast<TextRender*>(TextRender::Create(m_Font, 0, glm::vec3(1.f, 1.f, 1.f), false, false, transformUI->GetScale(), name));
         entity->AddComponent(textRender);
 
         Renderer::Singleton()->Submit(textRender);
@@ -164,10 +171,10 @@ void Console::CreateTextRows()
     name = std::string("ConsoleRow") + std::to_string(NUM_ROWS - 1);
     m_InputRow = Entity::Create(name);
 
-    transformUI = static_cast<TransformUI*>(TransformUI::Create(glm::vec2(0.f, (NUM_ROWS - 1) * m_RowHeight), 0.f, glm::vec2(displayWidth, m_RowHeight)));
+    transformUI = static_cast<TransformUI*>(TransformUI::Create(glm::vec3(0.f, (NUM_ROWS - 1) * m_RowHeight, 0.f), 0.f, glm::vec3(displayWidth, m_RowHeight, 1.f)));
     m_InputRow->AddComponent(transformUI);
 
-    textRender = static_cast<TextRender*>(TextRender::Create(m_Font, 0, glm::vec3(1.f, 1.f, 1.f), true, false, transformUI->GetSize(), ""));
+    textRender = static_cast<TextRender*>(TextRender::Create(m_Font, 0, glm::vec3(1.f, 1.f, 1.f), true, false, transformUI->GetScale(), ""));
     m_InputRow->AddComponent(textRender);
 
     Renderer::Singleton()->Submit(textRender);
@@ -177,8 +184,8 @@ void Console::CreateBackground()
 {
     m_Background = Entity::Create("ConsoleBackground");
     TransformUI* transformUI =
-        static_cast<TransformUI*>(TransformUI::Create(glm::vec2(0.f, 0.f), 0.f,
-                                                        glm::vec2((float)Display::Singleton()->GetWidth(), (float)Display::Singleton()->GetHeight())));
+        static_cast<TransformUI*>(TransformUI::Create(glm::vec3(0.f, 0.f, 0.f), 0.f,
+                                                        glm::vec3((float)Display::Singleton()->GetWidth(), (float)Display::Singleton()->GetHeight(), 1.f)));
     m_Background->AddComponent(transformUI);
 
     SpriteRender* spriteRender = static_cast<SpriteRender*>(SpriteRender::Create(Resources::Singleton()->GetTexture("white"), glm::vec4(0.f, 0.f, 0.f, 0.7f)));

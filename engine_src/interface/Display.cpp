@@ -81,5 +81,5 @@ void Display::HandleEvent(WindowSizeEvent* event)
     m_WidthScale = (float)m_Width / m_OriginalWidth;
     m_HeightScale = (float)m_Height / m_OriginalHeight;
     //glViewport(0, 0, m_Width, m_Height);
-    Debug::Log(Debug::DebugLevel::Info, "WidthScale " + std::to_string(m_WidthScale) + " " + "HeightScale " + std::to_string(m_HeightScale));
+    //Debug::Log(Debug::DebugLevel::Info, "WidthScale " + std::to_string(m_WidthScale) + " " + "HeightScale " + std::to_string(m_HeightScale));
 }

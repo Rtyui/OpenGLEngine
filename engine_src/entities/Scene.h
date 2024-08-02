@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-#include "entities/Camera.h"
+#include "components/Camera.h"
 #include "Light.h"
 #include "entities/Entity.h"
 #include "rendering/Renderer.h"
@@ -38,7 +38,6 @@ private:
 
     static void LoadXMLEntity(Scene* scene, const pugi::xml_node& node);
     static void LoadXMLLight(Scene* scene, const pugi::xml_node& node);
-    static void LoadXMLCamera(Scene* scene, const pugi::xml_node& node);
 
 };
 

@@ -155,6 +155,7 @@
     <ClCompile Include="engine_src\interface\events\KeyEvent.cpp" />
     <ClCompile Include="engine_src\interface\events\Event.cpp" />
     <ClCompile Include="engine_src\interface\events\EventListener.cpp" />
+    <ClCompile Include="engine_src\interface\events\WindowSizeEvent.cpp" />
     <ClCompile Include="engine_src\ui\primitives\Font.cpp" />
     <ClCompile Include="engine_src\ui\primitives\FontCharacter.cpp" />
     <ClCompile Include="engine_src\components\SpriteRender.cpp" />
@@ -164,7 +165,7 @@
     <ClCompile Include="engine_src\Application.cpp" />
     <ClCompile Include="engine_src\components\Component.cpp" />
     <ClCompile Include="engine_src\components\Terrain.cpp" />
-    <ClCompile Include="engine_src\entities\Camera.cpp" />
+    <ClCompile Include="engine_src\components\Camera.cpp" />
     <ClCompile Include="engine_src\entities\Entity.cpp" />
     <ClCompile Include="engine_src\entities\Light.cpp" />
     <ClCompile Include="engine_src\interface\Debug.cpp" />
@@ -342,6 +343,7 @@
     <ClInclude Include="engine_src\interface\events\KeyEvent.h" />
     <ClInclude Include="engine_src\interface\events\Event.h" />
     <ClInclude Include="engine_src\interface\events\EventListener.h" />
+    <ClInclude Include="engine_src\interface\events\WindowSizeEvent.h" />
     <ClInclude Include="engine_src\ui\primitives\Font.h" />
     <ClInclude Include="engine_src\ui\primitives\FontCharacter.h" />
     <ClInclude Include="engine_src\components\SpriteRender.h" />
@@ -350,7 +352,7 @@
     <ClInclude Include="engine_src\components\MeshRender.h" />
     <ClInclude Include="engine_src\components\Component.h" />
     <ClInclude Include="engine_src\components\Terrain.h" />
-    <ClInclude Include="engine_src\entities\Camera.h" />
+    <ClInclude Include="engine_src\components\Camera.h" />
     <ClInclude Include="engine_src\entities\Entity.h" />
     <ClInclude Include="engine_src\entities\Light.h" />
     <ClInclude Include="engine_src\interface\Debug.h" />

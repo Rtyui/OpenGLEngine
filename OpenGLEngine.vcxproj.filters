@@ -48,7 +48,7 @@
     <ClCompile Include="engine_src\rendering\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine_src\entities\Camera.cpp">
+    <ClCompile Include="engine_src\components\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine_src\interface\Display.cpp">
@@ -139,6 +139,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine_src\interface\ConsoleCommands.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine_src\interface\events\WindowSizeEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1437,7 +1440,7 @@
     <ClInclude Include="engine_src\rendering\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine_src\entities\Camera.h">
+    <ClInclude Include="engine_src\components\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\interface\Display.h">
@@ -1531,6 +1534,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\interface\ConsoleCommands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine_src\interface\events\WindowSizeEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

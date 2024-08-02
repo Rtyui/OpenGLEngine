@@ -8,6 +8,9 @@
 #include "interface/events/EventsManager.h"
 #include "interface/Console.h"
 #include "components/Transform.h"
+#include "Utils.h"
+
+#include <vendor/glm/glm.hpp>
 
 int main(void)
 {
@@ -23,7 +26,8 @@ int main(void)
 
     Resources::Singleton()->GetScene("Scene1")->Load();
     bool adev = false;
-    
+
+    Debug::Log(Debug::DebugLevel::Error, Utils::Mat4ToString(glm::mat4(1.f)));
     while (!Display::Singleton()->WindowShouldClose())
     {
         TimeClock::Singleton()->Update();

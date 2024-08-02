@@ -23,7 +23,7 @@ TextRender::TextRender() :
 }
 
 TextRender::TextRender(Font* font, const unsigned& fontSize, const glm::vec3& color, const bool& input, const bool& wrapLines,
-    const glm::vec2& size, const std::string& text) :
+    const glm::vec3& size, const std::string& text) :
     EventListener({ Event::EventType::CharEvent, Event::EventType::KeyEvent, Event::EventType::MouseButtonEvent }),
     m_OriginalText(text), m_MeshText(""), m_Mesh(nullptr), m_CursorMesh(nullptr), m_Font(font), m_Color(color),
     m_FontSize(fontSize), m_FontScale(0), m_Input(input), m_RenderCursor(false), m_Selected(false), m_WrapLines(wrapLines), m_MeshIndex(0),
@@ -131,7 +131,6 @@ void TextRender::HandleEvent(MouseButtonEvent* mouseButtonEvent)
     TransformUI* transform = static_cast<TransformUI*>(m_Entity->GetTransform());
 
     SetSelected(transform->IsScreenPointOn(mousePosition));
-    Debug::Log(Debug::DebugLevel::Info, "click at " + std::to_string(mousePosition.x) + " " + std::to_string(mousePosition.y));
 }
 
 void TextRender::GetSubmitted()
@@ -149,7 +148,7 @@ void TextRender::Update()
     UpdateCursorAnimation();
 }
 
-void TextRender::Initialize(const glm::vec2& size)
+void TextRender::Initialize(const glm::vec3& size)
 {
     unsigned maxCharCount = 0;
     m_MaxLineSize = size.x;
@@ -465,7 +464,7 @@ Component* TextRender::CreateFromXMLNode(const pugi::xml_node& node, Entity* ent
     }
 
     TransformUI* transformUI = entity->GetComponent<TransformUI>();
-    return new TextRender(font, fontSize, color, input, wrapLines, transformUI->GetSize(), text);
+    return new TextRender(font, fontSize, color, input, wrapLines, transformUI->GetScale(), text);
 }
 
 void TextRender::SetColor(const glm::vec3& color)
@@ -474,7 +473,7 @@ void TextRender::SetColor(const glm::vec3& color)
 }
 
 Component* TextRender::Create(Font* font, const unsigned& fontSize, const glm::vec3& color, const bool& input, const bool& wrapLines,
-    const glm::vec2& size, const std::string& text)
+    const glm::vec3& size, const std::string& text)
 {
     return new TextRender(font, fontSize, color, input, wrapLines, size, text);
 }

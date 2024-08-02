@@ -6,13 +6,13 @@
 #include <vendor/glm/gtc/matrix_transform.hpp>
 
 TransformUI::TransformUI() :
-    m_Position(0.f), m_Rotation(0.f), m_Size(1.f)
+    Transform()
 {
     UpdateTransformationMatrix();
 }
 
-TransformUI::TransformUI(const glm::vec2& position, const float& rotation, const glm::vec2& size) :
-    m_Position(position), m_Rotation(rotation), m_Size(size)
+TransformUI::TransformUI(const glm::vec3& position, const float& rotation, const glm::vec3& size) :
+    Transform(position, glm::vec3(0.f, 0.f, rotation), size)
 {
     UpdateTransformationMatrix();
 }
@@ -21,51 +21,22 @@ void TransformUI::UpdateTransformationMatrix()
 {
     m_TransformationMatrix = m_NoScaleTM = glm::mat4(1.f);
     m_NoScaleTM = glm::translate(m_NoScaleTM, glm::vec3(m_Position.x, -m_Position.y, 0.f));
-    m_NoScaleTM = glm::rotate(m_NoScaleTM, m_Rotation, glm::vec3(0.f, 0.f, 1.f));
-    m_TransformationMatrix = glm::scale(m_NoScaleTM, glm::vec3(m_Size, 1.f));
-}
-
-void TransformUI::IncreasePosition(glm::vec3 delta)
-{
-    Debug::Log(Debug::Warning, "P Using 3D movement for UI object '" + m_Entity->GetName() + "'!");
-    
-}
-
-void TransformUI::IncreaseRotation(glm::vec3 delta)
-{
-    Debug::Log(Debug::Warning, "R Using 3D movement for UI object '" + m_Entity->GetName() + "'!");
-}
-
-void TransformUI::IncreasePosition(glm::vec2 delta)
-{
-    m_Position += delta;
-    if (delta != glm::vec2(0.f))
-    {
-        UpdateTransformationMatrix();
-    }
-}
-
-void TransformUI::IncreaseRotation(float delta)
-{
-    m_Rotation += delta;
-    if (delta != 0.f)
-    {
-        UpdateTransformationMatrix();
-    }
+    m_NoScaleTM = glm::rotate(m_NoScaleTM, m_Rotation.z, glm::vec3(0.f, 0.f, 1.f));
+    m_TransformationMatrix = glm::scale(m_NoScaleTM, m_Scale);
 }
 
 bool TransformUI::IsScreenPointOn(glm::vec2 position)
 {
-    return (position.x >= m_Position.x) && (position.x <= (m_Position.x + m_Size.x)) &&
-        (position.y >= m_Position.y) && (position.y <= (m_Position.y + m_Size.y));
+    return (position.x >= m_Position.x) && (position.x <= (m_Position.x + m_Scale.x)) &&
+        (position.y >= m_Position.y) && (position.y <= (m_Position.y + m_Scale.y));
 }
 
 
 Component* TransformUI::CreateFromXMLNode(const pugi::xml_node& node, Entity* entity)
 {
-    glm::vec2 position(0.f);
+    glm::vec3 position(0.f);
     float rotation(0.f);
-    glm::vec2 size(1.f);
+    glm::vec3 size(1.f);
 
     const char* positionData = node.attribute("position").value();
     if (positionData[0] && (sscanf_s(positionData, "%f %f", &position.x, &position.y) != 2))
@@ -90,7 +61,7 @@ Component* TransformUI::CreateFromXMLNode(const pugi::xml_node& node, Entity* en
     return new TransformUI(position, rotation, size);
 }
 
-Component* TransformUI::Create(const glm::vec2& position, const float& rotation, const glm::vec2& size)
+Component* TransformUI::Create(const glm::vec3& position, const float& rotation, const glm::vec3& size)
 {
     return new TransformUI(position, rotation, size);
 }

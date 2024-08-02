@@ -1,6 +1,5 @@
 #pragma once
 #include "rendering/internal/Shader.h"
-#include "entities/Camera.h"
 #include "rendering/internal/Texture.h"
 
 #include <string>

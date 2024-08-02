@@ -5,55 +5,35 @@
 #include <vendor/glm/gtc/matrix_transform.hpp>
 
 Transform3D::Transform3D() :
-    m_Position(0.f), m_Rotation(0.f), m_Scale(1.f)
+    Transform()
 {
     UpdateTransformationMatrix();
 }
 
 Transform3D::Transform3D(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
-    m_Position(position), m_Rotation(rotation), m_Scale(scale)
+    Transform(position, rotation, scale)
 {
     UpdateTransformationMatrix();
 }
 
 void Transform3D::UpdateTransformationMatrix()
 {
-    m_TransformationMatrix = m_NoScaleTM = glm::mat4(1.f);
-    m_NoScaleTM = glm::translate(m_NoScaleTM, m_Position);
-    m_NoScaleTM = glm::rotate(m_NoScaleTM, m_Rotation.x, glm::vec3(1.f, 0.f, 0.f));
-    m_NoScaleTM = glm::rotate(m_NoScaleTM, glm::radians(m_Rotation.y), glm::vec3(0.f, 1.f, 0.f));
-    m_NoScaleTM = glm::rotate(m_NoScaleTM, m_Rotation.z, glm::vec3(0.f, 0.f, 1.f));
-    m_TransformationMatrix = glm::scale(m_NoScaleTM, m_Scale);
+    m_TransformationMatrix = glm::mat4(1.f);
+    m_TransformationMatrix = glm::translate(m_TransformationMatrix, m_Position);
+    m_TransformationMatrix = glm::rotate(m_TransformationMatrix, m_Rotation.x, glm::vec3(1.f, 0.f, 0.f));
+    m_TransformationMatrix = glm::rotate(m_TransformationMatrix, glm::radians(m_Rotation.y), glm::vec3(0.f, 1.f, 0.f));
+    m_TransformationMatrix = glm::rotate(m_TransformationMatrix, m_Rotation.z, glm::vec3(0.f, 0.f, 1.f));
+    m_TransformationMatrix = glm::scale(m_TransformationMatrix, m_Scale);
 }
 
-void Transform3D::IncreasePosition(glm::vec3 delta)
+void Transform3D::Update()
 {
-    m_Position += delta;
-    if (delta != glm::vec3(0.f))
-    {
-        UpdateTransformationMatrix();
-    }
-}
+    m_PositionChanged = (m_Position != m_LastPosition);
+    m_RotationChanged = (m_Rotation != m_LastRotation);
 
-void Transform3D::IncreaseRotation(glm::vec3 delta)
-{
-    m_Rotation += delta;
-    if (delta != glm::vec3(0.f))
-    {
-        UpdateTransformationMatrix();
-    }
+    m_LastPosition = m_Position;
+    m_LastRotation = m_Rotation;
 }
-
-void Transform3D::IncreasePosition(glm::vec2 delta)
-{
-    Debug::Log(Debug::Warning, "P Using UI movement for 3D object '" + m_Entity->GetName() + "'!");
-}
-
-void Transform3D::IncreaseRotation(float delta)
-{
-    Debug::Log(Debug::Warning, "R Using UI movement for 3D object '" + m_Entity->GetName() + "'!");
-}
-
 
 Component* Transform3D::CreateFromXMLNode(const pugi::xml_node& node, Entity* entity)
 {

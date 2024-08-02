@@ -11,10 +11,6 @@ Scene::Scene() :
 
 Scene::~Scene()
 {
-    if (m_Camera)
-    {
-        delete m_Camera;
-    }
     if (m_Light)
     {
         delete m_Light;
@@ -40,6 +36,7 @@ void Scene::Load()
 
     m_Light->Load();
     m_Camera->UpdateProjectionMatrix(true);
+    m_Camera->UpdateViewMatrix(true);
     s_CurrentScene = this;
 }
 
@@ -122,10 +119,6 @@ Scene* Scene::CreateFromXMLFile(const std::string& name, const std::string& file
         {
             LoadXMLLight(scene, child);
         }
-        else if (childName == "Camera")
-        {
-            LoadXMLCamera(scene, child);
-        }
         else
         {
             Debug::Log(Debug::Warning, "Unknown child type name '" + childName + "'!");
@@ -160,6 +153,10 @@ void Scene::LoadXMLEntity(Scene* scene, const pugi::xml_node& node)
         return;
     }
     scene->m_Entities.push_back(entity);
+    if (entity->GetName() == "Camera")
+    {
+        scene->m_Camera = entity->GetComponent<Camera>();
+    }
 }
 
 void Scene::LoadXMLLight(Scene* scene, const pugi::xml_node& node)
@@ -174,19 +171,4 @@ void Scene::LoadXMLLight(Scene* scene, const pugi::xml_node& node)
         delete scene->m_Light;
     }
     scene->m_Light = light;
-}
-
-void Scene::LoadXMLCamera(Scene* scene, const pugi::xml_node& node)
-{
-    Camera* camera = Camera::CreateFromXMLNode(node);
-    if (!camera)
-    {
-        return;
-    }
-    if (scene->m_Camera)
-    {
-        delete scene->m_Camera;
-    }
-    Debug::Log(Debug::Info, "parsed camera");
-    scene->m_Camera = camera;
 }

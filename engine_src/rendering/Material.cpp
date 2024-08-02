@@ -13,7 +13,7 @@ Material::Material(Shader* shader)
 }
 
 Material::Material()
-    : m_Name("default")
+    : m_Name("default"), m_Shader(nullptr)
 {
 }
 

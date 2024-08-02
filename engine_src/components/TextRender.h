@@ -65,15 +65,15 @@ public:
 
     static Component* CreateFromXMLNode(const pugi::xml_node& node, Entity* entity);
     static Component* Create(Font* font, const unsigned& fontSize, const glm::vec3& color, const bool& input, const bool& wrapLines,
-        const glm::vec2& size, const std::string& text);
+        const glm::vec3& size, const std::string& text);
 
 private:
 
     TextRender();
     TextRender(Font* font, const unsigned& fontSize, const glm::vec3& color, const bool& input, const bool& wrapLines,
-        const glm::vec2& size, const std::string& text);
+        const glm::vec3& size, const std::string& text);
 
-    void Initialize(const glm::vec2& size);
+    void Initialize(const glm::vec3& size);
     bool AddCharacter(std::vector<float>& vertices, std::vector<unsigned>& indices, const char& c, const unsigned& lineIndex);
     void UpdateMeshText();
     void UpdateMeshTextCursor(const unsigned& lineIndex);
