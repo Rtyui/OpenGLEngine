@@ -1,6 +1,5 @@
 #include "components/ComponentsFactory.h"
-#include "components/Transform3D.h"
-#include "components/TransformUI.h"
+#include "components/Transform.h"
 #include "components/MeshRender.h"
 #include "components/SpriteRender.h"
 #include "components/TextRender.h"
@@ -9,8 +8,7 @@
 
 std::unordered_map<std::string, Component::ComponentXMLCreator> ComponentsFactory::s_ComponentFactoryMap =
 {
-    {"TransformUI", TransformUI::CreateFromXMLNode},
-    {"Transform3D", Transform3D::CreateFromXMLNode},
+    {"Transform", Transform::CreateFromXMLNode},
     {"MeshRender", MeshRender::CreateFromXMLNode},
     {"SpriteRender", SpriteRender::CreateFromXMLNode},
     {"TextRender", TextRender::CreateFromXMLNode},

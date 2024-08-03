@@ -1,7 +1,7 @@
 #include "components/TextRender.h"
 #include "interface/Debug.h"
 #include "Resources.h"
-#include "components/TransformUI.h"
+#include "components/Transform.h"
 #include "interface/events/CharEvent.h"
 #include "interface/events/KeyEvent.h"
 #include "interface/TimeClock.h"
@@ -128,9 +128,7 @@ void TextRender::HandleEvent(MouseButtonEvent* mouseButtonEvent)
     }
     glm::vec2 mousePosition = (glm::vec2)Input::Singleton()->GetMousePosition();
 
-    TransformUI* transform = static_cast<TransformUI*>(m_Entity->GetTransform());
-
-    SetSelected(transform->IsScreenPointOn(mousePosition));
+    SetSelected(m_Entity->GetTransform()->IsScreenPointOn(mousePosition));
 }
 
 void TextRender::GetSubmitted()
@@ -463,8 +461,13 @@ Component* TextRender::CreateFromXMLNode(const pugi::xml_node& node, Entity* ent
         return nullptr;
     }
 
-    TransformUI* transformUI = entity->GetComponent<TransformUI>();
-    return new TextRender(font, fontSize, color, input, wrapLines, transformUI->GetScale(), text);
+    Transform* transform = entity->GetComponent<Transform>();
+    if (!transform)
+    {
+        Debug::Log(Debug::DebugLevel::Error, "Cannot create TextRender without Transform");
+        return nullptr;
+    }
+    return new TextRender(font, fontSize, color, input, wrapLines, transform->GetScale(), text);
 }
 
 void TextRender::SetColor(const glm::vec3& color)

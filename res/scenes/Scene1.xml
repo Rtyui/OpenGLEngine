@@ -3,7 +3,7 @@
 
     
   <Entity name="Camera">
-      <Transform3D position="0 0 0" rotation="0 0 0" scale="1 1 1"></Transform3D>
+      <Transform position="0 0 0" rotation="0 0 0" scale="1 1 1" ui="0"></Transform>
       <Camera fov="70" near="0.1" far="100">
     </Camera>
   </Entity>
@@ -12,7 +12,7 @@
   </Light>
   
   <Entity name="Entity1">
-    <Transform3D position="0 0 -20" rotation="0 0 0" scale="1 1 1"></Transform3D>
+    <Transform position="0 0 -20" rotation="0 0 0" scale="1 1 1" ui="0"></Transform>
     <MeshRender mesh="stall" material="Material1"></MeshRender>
   </Entity>
 
@@ -33,7 +33,7 @@
   </Entity>-->
 
   <Entity name="Entity4">
-    <TransformUI position="0 300" rotation="0" size="800 63"></TransformUI>
+    <Transform position="0 300 0" rotation="0 0 0" scale="800 63 1" ui="1"></Transform>
     <SpriteRender sprite="white" color="0 1 0 0.1"></SpriteRender>
     <TextRender input="1" wrapLines="0" font="dialog" color="1 1 0"></TextRender>
   </Entity>

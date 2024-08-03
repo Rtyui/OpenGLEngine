@@ -1,2 +1,4 @@
-﻿  TextRender.cpp
+﻿  Application.cpp
+  Transform.cpp
+  Generating Code...
   OpenGLEngine.vcxproj -> S:\Projects\OpenGLEngine\Debug\OpenGLEngine.exe

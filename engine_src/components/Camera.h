@@ -13,8 +13,6 @@ private:
     glm::vec3 m_Forward;
     glm::vec3 m_Right;
 
-    Transform* m_Transform;
-
     glm::mat4 m_ProjectionMatrix;
     glm::mat4 m_ViewMatrix;
     glm::mat4 m_UIProjectionMatrix;
@@ -24,7 +22,7 @@ private:
     float m_NearPlane;
     float m_FarPlane;
 public:
-    Camera(Transform* transform, const float fov, const float near, const float far);
+    Camera(const float fov, const float near, const float far);
     ~Camera();
     void Update();
 

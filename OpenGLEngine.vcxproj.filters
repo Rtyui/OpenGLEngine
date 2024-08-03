@@ -99,12 +99,6 @@
     <ClCompile Include="engine_src\components\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine_src\components\Transform3D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine_src\components\TransformUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="engine_src\ui\primitives\FontCharacter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1492,12 +1486,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\components\Transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine_src\components\Transform3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine_src\components\TransformUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\ui\primitives\FontCharacter.h">
