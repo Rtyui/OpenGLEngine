@@ -165,7 +165,7 @@ void Console::CreateTextRows()
         textRender = static_cast<TextRender*>(TextRender::Create(m_Font, 0, glm::vec3(1.f, 1.f, 1.f), false, false, transform->GetScale(), name));
         entity->AddComponent(textRender);
 
-        Renderer::Singleton()->Submit(textRender);
+        Renderer::Singleton()->Submit(static_cast<Renderable*>(textRender));
     }
 
     name = std::string("ConsoleRow") + std::to_string(NUM_ROWS - 1);
@@ -177,7 +177,7 @@ void Console::CreateTextRows()
     textRender = static_cast<TextRender*>(TextRender::Create(m_Font, 0, glm::vec3(1.f, 1.f, 1.f), true, false, transform->GetScale(), ""));
     m_InputRow->AddComponent(textRender);
 
-    Renderer::Singleton()->Submit(textRender);
+    Renderer::Singleton()->Submit(static_cast<Renderable*>(textRender));
 }
 
 void Console::CreateBackground()
@@ -190,5 +190,5 @@ void Console::CreateBackground()
     SpriteRender* spriteRender = static_cast<SpriteRender*>(SpriteRender::Create(Resources::Singleton()->GetTexture("white"), glm::vec4(0.f, 0.f, 0.f, 0.7f)));
     m_Background->AddComponent(spriteRender);
     
-    Renderer::Singleton()->Submit(spriteRender);
+    Renderer::Singleton()->Submit(static_cast<Renderable*>(spriteRender));
 }

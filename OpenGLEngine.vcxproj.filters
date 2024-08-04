@@ -63,7 +63,7 @@
     <ClCompile Include="engine_src\entities\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine_src\entities\Light.cpp">
+    <ClCompile Include="engine_src\components\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine_src\rendering\Material.cpp">
@@ -72,7 +72,7 @@
     <ClCompile Include="engine_src\rendering\internal\UniformBlocksManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine_src\Utils.cpp">
+    <ClCompile Include="engine_src\utils\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine_src\vendor\pugixml\pugixml.cpp">
@@ -129,13 +129,16 @@
     <ClCompile Include="engine_src\interface\events\MouseButtonEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine_src\rendering\Renderable.cpp">
+    <ClCompile Include="engine_src\components\Renderable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine_src\interface\ConsoleCommands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine_src\interface\events\WindowSizeEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine_src\utils\XMLUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1449,7 +1452,7 @@
     <ClInclude Include="engine_src\entities\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine_src\entities\Light.h">
+    <ClInclude Include="engine_src\components\Light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\rendering\Material.h">
@@ -1458,7 +1461,7 @@
     <ClInclude Include="engine_src\rendering\internal\UniformBlocksManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine_src\Utils.h">
+    <ClInclude Include="engine_src\utils\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\vendor\pugixml\pugixml.hpp">
@@ -1518,13 +1521,16 @@
     <ClInclude Include="engine_src\interface\events\MouseButtonEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine_src\rendering\Renderable.h">
+    <ClInclude Include="engine_src\components\Renderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\interface\ConsoleCommands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\interface\events\WindowSizeEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine_src\utils\XMLUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

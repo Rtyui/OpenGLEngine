@@ -19,6 +19,22 @@ Entity::~Entity()
     }
 }
 
+void Entity::Load()
+{
+    for (Component* component : m_Components)
+    {
+        component->Load();
+    }
+}
+
+void Entity::Unload()
+{
+    for (Component* component : m_Components)
+    {
+        component->Unload();
+    }
+}
+
 void Entity::Update()
 {
     for (Component* component : m_Components)

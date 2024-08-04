@@ -7,6 +7,7 @@
 #include "interface/TimeClock.h"
 #include "interface/events/MouseButtonEvent.h"
 #include "interface/Input.h"
+#include "utils/XMLUtils.h"
 
 #include <sstream>
 
@@ -129,16 +130,6 @@ void TextRender::HandleEvent(MouseButtonEvent* mouseButtonEvent)
     glm::vec2 mousePosition = (glm::vec2)Input::Singleton()->GetMousePosition();
 
     SetSelected(m_Entity->GetTransform()->IsScreenPointOn(mousePosition));
-}
-
-void TextRender::GetSubmitted()
-{
-    Renderer::Singleton()->Submit(this);
-}
-
-void TextRender::GetUnSubmitted()
-{
-    Renderer::Singleton()->UnSubmit(this);
 }
 
 void TextRender::Update()
@@ -410,63 +401,29 @@ void TextRender::SetSelected(const bool& selected)
 
 Component* TextRender::CreateFromXMLNode(const pugi::xml_node& node, Entity* entity)
 {
-    Font* font;
-
-    int temp = 0;
-    const char* buffer = nullptr;
-
-    bool input = false;
-    bool wrapLines = false;
-    std::string text;
-    glm::vec3 color(1.f);
-    unsigned fontSize = 0;
-
-    buffer = node.attribute("input").value();
-    if ((sscanf_s(buffer, "%d", &temp) != 1))
-    {
-        Debug::Log(Debug::Error, "Error while parsing text input '" + std::string(buffer) + "'!");
-        return nullptr;
-    }
-    input = temp;
-
-    buffer = node.attribute("wrapLines").value();
-    if ((sscanf_s(buffer, "%d", &temp) != 1))
-    {
-        Debug::Log(Debug::Error, "Error while parsing text wrapLines '" + std::string(buffer) + "'!");
-        return nullptr;
-    }
-    wrapLines = temp;
-
-    text = node.attribute("text").value();
-
-    buffer = node.attribute("font").value();
-    font = Resources::Singleton()->GetFont(buffer);
-    if (!font)
-    {
-        Debug::Log(Debug::Error, "Invalid font '" + std::string(buffer) + "'!");
-        return nullptr;
-    }
-
-    buffer = node.attribute("color").value();
-    if (buffer[0] && (sscanf_s(buffer, "%f %f %f", &color.r, &color.g, &color.b) != 3))
-    {
-        Debug::Log(Debug::Error, "Error while parsing text color data '" + std::string(buffer) + "'!");
-        return nullptr;
-    }
-
-    buffer = node.attribute("fontSize").value();
-    if (!input && (sscanf_s(buffer, "%u", &fontSize) != 1))
-    {
-        Debug::Log(Debug::Error, "Error while parsing text font size '" + std::string(buffer) + "'!");
-        return nullptr;
-    }
-
     Transform* transform = entity->GetComponent<Transform>();
     if (!transform)
     {
         Debug::Log(Debug::DebugLevel::Error, "Cannot create TextRender without Transform");
         return nullptr;
     }
+
+    bool input = false;
+    bool wrapLines = false;
+    std::string text = node.attribute("text").value();
+    Font* font = nullptr;
+    glm::vec3 color(1.f);
+    unsigned fontSize = 0;
+
+    if (!ParseBoolFromXMLNode(node, "input", input, false) ||
+        !ParseBoolFromXMLNode(node, "wrapLines", wrapLines, false) ||
+        !ParseFontFromXMLNode(node, &font) ||
+        !ParseVec3FromXMLNode(node, "color", color, false) ||
+        !ParseUintFromXMLNode(node, "fontSize", fontSize, !input))
+    {
+        return nullptr;
+    }
+
     return new TextRender(font, fontSize, color, input, wrapLines, transform->GetScale(), text);
 }
 

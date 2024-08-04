@@ -5,11 +5,11 @@
 #include "rendering/Mesh.h"
 #include "interface/events/EventListener.h"
 #include "interface/events/Event.h"
-#include "rendering/Renderable.h"
+#include "components/Renderable.h"
 
 #include <vendor/glm/glm.hpp>
 
-class TextRender : public Component, public EventListener, public Renderable
+class TextRender : public EventListener, public Renderable
 {
 
 private:
@@ -47,8 +47,6 @@ public:
     virtual void HandleEvent(KeyEvent* keyEvent) override;
     virtual void HandleEvent(CharEvent* charEvent) override;
     virtual void HandleEvent(MouseButtonEvent* mouseButtonEvent) override;
-    virtual void GetSubmitted() override;
-    virtual void GetUnSubmitted() override;
 
     virtual void Update() override;
     void SetText(const std::string& text);

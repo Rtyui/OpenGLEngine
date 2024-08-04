@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Scene name="Scene1">
 
-    
-  <Entity name="Camera">
-      <Transform position="0 0 0" rotation="0 0 0" scale="1 1 1" ui="0"></Transform>
-      <Camera fov="70" near="0.1" far="100">
-    </Camera>
-  </Entity>
+    <Entity name="Camera">
+        <Transform position="0 0 0" rotation="0 0 0" scale="1 1 1" ui="0"/>
+        <Camera fov="70" near="0.1" far="100"/>
+    </Entity>
 
-  <Light name="Sun" position="0 100 0" color="1 1 1">
-  </Light>
-  
-  <Entity name="Entity1">
-    <Transform position="0 0 -20" rotation="0 0 0" scale="1 1 1" ui="0"></Transform>
-    <MeshRender mesh="stall" material="Material1"></MeshRender>
-  </Entity>
+    <Entity name="Sun">
+        <Transform position="0 100 0" rotation="0 0 0" scale="1 1 1" ui="0"/>
+        <Light color="1 1 1"/>
+    </Entity>
+
+    <Entity name="Entity1">
+        <Transform position="0 0 -20" rotation="0 0 0" scale="1 1 1" ui="0"/>
+        <MeshRender mesh="stall" material="Material1"/>
+    </Entity>
 
   <!--<Entity name="Entity2">
     <TransformUI position="100 500" rotation="0" size="100 100"></TransformUI>
@@ -32,10 +32,10 @@
     <TextRender input="0" wrapLines="0" text="Am avut ce sa fac aseara ca daca nu aveam nu faceam ce cacat" font="dialog" color="1 0 0" fontSize="50"></TextRender>
   </Entity>-->
 
-  <Entity name="Entity4">
-    <Transform position="0 300 0" rotation="0 0 0" scale="800 63 1" ui="1"></Transform>
-    <SpriteRender sprite="white" color="0 1 0 0.1"></SpriteRender>
-    <TextRender input="1" wrapLines="0" font="dialog" color="1 1 0"></TextRender>
-  </Entity>
-  
+    <Entity name="Entity4">
+        <Transform position="0 300 0" rotation="0 0 0" scale="800 63 1" ui="1"/>
+        <SpriteRender sprite="white" color="0 1 0 0.1"/>
+        <TextRender input="1" wrapLines="0" font="dialog" color="1 1 0"/>
+    </Entity>
+
 </Scene>

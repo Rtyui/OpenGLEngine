@@ -4,6 +4,8 @@
 #include "interface/Debug.h"
 #include "rendering/internal/UniformBlocksManager.h"
 #include "components/Transform.h"
+#include "interface/Console.h"
+#include "utils/XMLUtils.h"
 
 #include <vendor/glm/gtc/matrix_transform.hpp>
 #include <vendor/glm/gtc/constants.hpp>
@@ -18,6 +20,12 @@ Camera::Camera(const float fov, const float near, const float far) :
 
 Camera::~Camera()
 {
+}
+
+void Camera::Load()
+{
+    UpdateProjectionMatrix(true);
+    UpdateViewMatrix(true);
 }
 
 void Camera::Update()
@@ -35,36 +43,23 @@ Component* Camera::CreateFromXMLNode(const pugi::xml_node& node, Entity* entity)
         return nullptr;
     }
 
-    const char* fov_str = node.attribute("fov").value();
-    float fov;
-    if (sscanf_s(fov_str, "%f", &fov) != 1)
-    {
-        Debug::Log(Debug::Error, "Error while parsing camera fov data '" + std::string(fov_str) + "'!");
-        return nullptr;
-    }
+    float fov = 70.f;
+    float near = 0.1f;
+    float far = 100.f;
 
-    const char* near_str = node.attribute("near").value();
-    float near;
-    if (sscanf_s(near_str, "%f", &near) != 1)
+    if (!ParseFloatFromXMLNode(node, "fov", fov, false) ||
+        !ParseFloatFromXMLNode(node, "near", near, false) ||
+        !ParseFloatFromXMLNode(node, "far", far, false))
     {
-        Debug::Log(Debug::Error, "Error while parsing camera near data '" + std::string(near_str) + "'!");
-        return nullptr;
-    }
-
-    const char* far_str = node.attribute("far").value();
-    float far;
-    if (sscanf_s(far_str, "%f", &far) != 1)
-    {
-        Debug::Log(Debug::Error, "Error while parsing camera far data '" + std::string(far_str) + "'!");
         return nullptr;
     }
 
     Camera* camera = new Camera(fov, near, far);
 
-    camera->m_Entity = entity;
-    camera->UpdateProjectionMatrix(true);
-    camera->UpdateViewMatrix(true);
-    camera->m_Entity = nullptr;
+    //camera->m_Entity = entity;
+    //camera->UpdateProjectionMatrix(true);
+    //camera->UpdateViewMatrix(true);
+    //camera->m_Entity = nullptr;
 
     return camera;
 }
@@ -113,6 +108,10 @@ void Camera::UpdateViewMatrix(bool updateUBO)
 
 void Camera::Move()
 {
+    if (Console::Singleton()->IsShown())
+    {
+        return;
+    }
     if (Input::Singleton()->GetKey(GLFW_KEY_W))
     {
         m_Entity->GetTransform()->IncreasePosition(glm::vec3(0.f, 0.f, -5.f) * TimeClock::Singleton()->GetDeltaTime());

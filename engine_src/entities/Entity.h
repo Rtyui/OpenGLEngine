@@ -20,12 +20,14 @@ private:
 public:
     ~Entity();
 
+    void Load();
+    void Unload();
     void Update();
 
     void AddComponent(Component* component);
 
     template <class T>
-    T* GetComponent()
+    T* GetComponent() const
     {
         for (Component* component : m_Components)
         {
@@ -39,7 +41,7 @@ public:
     }
 
     template <class T>
-    void GetComponents(std::vector<T*>& componentsContainer)
+    void GetComponents(std::vector<T*>& componentsContainer) const
     {
         for (Component* component : m_Components)
         {

@@ -2,13 +2,13 @@
 
 #include "components/Component.h"
 #include "rendering/internal/Texture.h"
-#include "rendering/Renderable.h"
+#include "components/Renderable.h"
 
 #include <vendor/glm/glm.hpp>
 
 class Renderer;
 
-class SpriteRender : public Component, public Renderable
+class SpriteRender : public Renderable
 {
 private:
 
@@ -20,8 +20,6 @@ public:
     SpriteRender();
     SpriteRender(Texture* texture, const glm::vec4& color);
 
-    virtual void GetSubmitted() override;
-    virtual void GetUnSubmitted() override;
     virtual void Update() {};
 
     inline const glm::vec4 GetColor() const { return m_Color; }

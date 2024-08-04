@@ -8,7 +8,6 @@
 #include "interface/events/EventsManager.h"
 #include "interface/Console.h"
 #include "components/Transform.h"
-#include "Utils.h"
 
 #include <vendor/glm/glm.hpp>
 

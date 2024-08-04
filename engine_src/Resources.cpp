@@ -132,7 +132,7 @@ Font* Resources::GetFont(const std::string& name) const
 {
     if (m_Fonts.find(name) == m_Fonts.end())
     {
-        return nullptr;
+        return m_Fonts.at("dialog");
     }
     return m_Fonts.at(name);
 }

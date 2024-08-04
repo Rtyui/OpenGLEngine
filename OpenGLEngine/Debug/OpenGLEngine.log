@@ -1,4 +1,4 @@
-﻿  Application.cpp
-  Transform.cpp
+﻿  Camera.cpp
+  Light.cpp
   Generating Code...
   OpenGLEngine.vcxproj -> S:\Projects\OpenGLEngine\Debug\OpenGLEngine.exe

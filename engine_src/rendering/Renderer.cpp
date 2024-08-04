@@ -20,6 +20,46 @@ void Renderer::Clear()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+void Renderer::Submit(Renderable* renderable)
+{
+    if (MeshRender* meshRender = dynamic_cast<MeshRender*>(renderable))
+    {
+        Submit(meshRender);
+    }
+    else if (SpriteRender* spriteRender = dynamic_cast<SpriteRender*>(renderable))
+    {
+        Submit(spriteRender);
+    }
+    else if (TextRender* textRender = dynamic_cast<TextRender*>(renderable))
+    {
+        Submit(textRender);
+    }
+    else
+    {
+        Debug::Log(Debug::DebugLevel::Error, "Unknown renderable type of entity " + renderable->GetEntity()->GetName());
+    }
+}
+
+void Renderer::UnSubmit(Renderable* renderable)
+{
+    if (MeshRender* meshRender = dynamic_cast<MeshRender*>(renderable))
+    {
+        UnSubmit(meshRender);
+    }
+    else if (SpriteRender* spriteRender = dynamic_cast<SpriteRender*>(renderable))
+    {
+        UnSubmit(spriteRender);
+    }
+    else if (TextRender* textRender = dynamic_cast<TextRender*>(renderable))
+    {
+        UnSubmit(textRender);
+    }
+    else
+    {
+        Debug::Log(Debug::DebugLevel::Error, "Unknown renderable type of entity " + renderable->GetEntity()->GetName());
+    }
+}
+
 void Renderer::Submit(MeshRender* meshRender)
 {
     if (!meshRender)
@@ -132,15 +172,6 @@ void Renderer::UnSubmit(MeshRender* meshRender)
     }
 }
 
-Renderer* Renderer::Singleton()
-{
-    if (!s_Renderer)
-    {
-        s_Renderer = new Renderer();
-    }
-    return s_Renderer;
-}
-
 void Renderer::UnSubmit(SpriteRender* spriteRender)
 {
     unsigned layer = spriteRender->GetLayer();
@@ -166,15 +197,6 @@ void Renderer::UnSubmit(SpriteRender* spriteRender)
             return;
         }
     }
-}
-
-void Renderer::Destroy()
-{
-    if (!s_Renderer)
-    {
-        return;
-    }
-    delete s_Renderer;
 }
 
 void Renderer::UnSubmit(TextRender* textRender)
@@ -310,4 +332,22 @@ void Renderer::DrawText(RenderCacheData& layer)
         textCursorShader->SetUniformMat4f("u_TransformationMatrix", textRender->GetEntity()->GetTransform()->GetNoScaleTM());
         glDrawElements(GL_TRIANGLES, mesh->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
     }
+}
+
+Renderer* Renderer::Singleton()
+{
+    if (!s_Renderer)
+    {
+        s_Renderer = new Renderer();
+    }
+    return s_Renderer;
+}
+
+void Renderer::Destroy()
+{
+    if (!s_Renderer)
+    {
+        return;
+    }
+    delete s_Renderer;
 }

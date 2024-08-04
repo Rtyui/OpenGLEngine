@@ -20,6 +20,8 @@ public:
     virtual ~Component() = default;
     Component(Entity* entity);
 
+    virtual void Load() {};
+    virtual void Unload() {};
     virtual void UpdateP();
     virtual void Update() = 0;
 

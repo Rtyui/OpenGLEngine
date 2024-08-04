@@ -4,6 +4,7 @@
 #include "components/SpriteRender.h"
 #include "components/TextRender.h"
 #include "components/Camera.h"
+#include "components/Light.h"
 #include "interface/Debug.h"
 
 std::unordered_map<std::string, Component::ComponentXMLCreator> ComponentsFactory::s_ComponentFactoryMap =
@@ -12,7 +13,8 @@ std::unordered_map<std::string, Component::ComponentXMLCreator> ComponentsFactor
     {"MeshRender", MeshRender::CreateFromXMLNode},
     {"SpriteRender", SpriteRender::CreateFromXMLNode},
     {"TextRender", TextRender::CreateFromXMLNode},
-    {"Camera", Camera::CreateFromXMLNode}
+    {"Camera", Camera::CreateFromXMLNode},
+    {"Light", Light::CreateFromXMLNode}
 };
 
 bool ComponentsFactory::HasType(const std::string& name)

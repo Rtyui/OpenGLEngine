@@ -24,6 +24,7 @@ private:
 public:
     Camera(const float fov, const float near, const float far);
     ~Camera();
+    void Load() override;
     void Update();
 
     inline const glm::mat4 GetProjectionMatrix() const { return m_ProjectionMatrix; }
@@ -34,4 +35,5 @@ private:
     void UpdateProjectionMatrix(bool updateUBO);
     void UpdateViewMatrix(bool updateUBO);
     void Move();
+
 };

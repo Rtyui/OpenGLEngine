@@ -1,6 +1,6 @@
 #include "components/Transform.h"
 #include "interface/Debug.h"
-#include "Utils.h"
+#include "utils/XMLUtils.h"
 
 #include <vendor/glm/gtc/matrix_transform.hpp>
 
@@ -80,10 +80,10 @@ Component* Transform::CreateFromXMLNode(const pugi::xml_node& node, Entity* enti
     glm::vec3 scale(1.f);
     bool ui = false;
 
-    if (!Utils::ParseVec3FromXMLNode(node, "position", position, false) ||
-        !Utils::ParseVec3FromXMLNode(node, "rotation", rotation, false) ||
-        !Utils::ParseVec3FromXMLNode(node, "scale", scale, false) ||
-        !Utils::ParseBoolFromXMLNode(node, "ui", ui, true))
+    if (!ParseVec3FromXMLNode(node, "position", position, false) ||
+        !ParseVec3FromXMLNode(node, "rotation", rotation, false) ||
+        !ParseVec3FromXMLNode(node, "scale", scale, false) ||
+        !ParseBoolFromXMLNode(node, "ui", ui, true))
     {
         return nullptr;
     }

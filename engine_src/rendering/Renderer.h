@@ -1,4 +1,5 @@
 #pragma once
+#include "components/Renderable.h"
 #include "components/MeshRender.h"
 #include "components/SpriteRender.h"
 #include "components/TextRender.h"
@@ -34,15 +35,17 @@ public:
     void DrawUI(RenderCacheData& layer);
     void DrawSprites(RenderCacheData& layer);
     void DrawText(RenderCacheData& layer);
+    void Submit(Renderable* renderable);
+    void UnSubmit(Renderable* renderable);
+
+private:
+
     void Submit(MeshRender* meshRender);
     void Submit(SpriteRender* spriteRender);
     void Submit(TextRender* textRender);
     void UnSubmit(MeshRender* meshRender);
     void UnSubmit(SpriteRender* spriteRender);
     void UnSubmit(TextRender* textRender);
-
-private:
-
     Renderer();
 };
 

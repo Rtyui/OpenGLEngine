@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "components/Camera.h"
-#include "Light.h"
+#include "components/Light.h"
 #include "entities/Entity.h"
 #include "rendering/Renderer.h"
 
@@ -12,8 +12,6 @@ private:
     static Scene* s_CurrentScene;
 
     std::string m_Name;
-    Camera* m_Camera;
-    Light* m_Light;
 
     std::vector<Entity*> m_Entities;
 
@@ -37,7 +35,6 @@ public:
 private:
 
     static void LoadXMLEntity(Scene* scene, const pugi::xml_node& node);
-    static void LoadXMLLight(Scene* scene, const pugi::xml_node& node);
 
 };
 

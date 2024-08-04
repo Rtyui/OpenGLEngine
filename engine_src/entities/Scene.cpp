@@ -5,16 +5,12 @@
 Scene* Scene::s_CurrentScene = nullptr;
 
 Scene::Scene() :
-    m_Name("default"), m_Camera(nullptr), m_Light(nullptr)
+    m_Name("default")
 {
 }
 
 Scene::~Scene()
 {
-    if (m_Light)
-    {
-        delete m_Light;
-    }
     for (auto* entityIt : m_Entities)
     {
         delete entityIt;
@@ -23,40 +19,23 @@ Scene::~Scene()
 
 void Scene::Load()
 {
-    std::vector<Renderable*> renderables;
     for (auto& entityIt : m_Entities)
     {
-        entityIt->GetComponents<Renderable>(renderables);
+        entityIt->Load();
     }
-
-    for (Renderable* renderable : renderables)
-    {
-        renderable->GetSubmitted();
-    }
-
-    m_Light->Load();
-    m_Camera->UpdateProjectionMatrix(true);
-    m_Camera->UpdateViewMatrix(true);
     s_CurrentScene = this;
 }
 
 void Scene::Unload(Renderer* renderer)
 {
-    std::vector<Renderable*> renderables;
     for (auto& entityIt : m_Entities)
     {
-        entityIt->GetComponents<Renderable>(renderables);
-    }
-
-    for (Renderable* renderable : renderables)
-    {
-        renderable->GetSubmitted();
+        entityIt->Unload();
     }
 }
 
 void Scene::Update()
 {
-    m_Camera->Update();
     for (Entity* entity : m_Entities)
     {
         entity->Update();
@@ -115,10 +94,6 @@ Scene* Scene::CreateFromXMLFile(const std::string& name, const std::string& file
         {
             LoadXMLEntity(scene, child);
         }
-        else if (childName == "Light")
-        {
-            LoadXMLLight(scene, child);
-        }
         else
         {
             Debug::Log(Debug::Warning, "Unknown child type name '" + childName + "'!");
@@ -153,22 +128,4 @@ void Scene::LoadXMLEntity(Scene* scene, const pugi::xml_node& node)
         return;
     }
     scene->m_Entities.push_back(entity);
-    if (entity->GetName() == "Camera")
-    {
-        scene->m_Camera = entity->GetComponent<Camera>();
-    }
-}
-
-void Scene::LoadXMLLight(Scene* scene, const pugi::xml_node& node)
-{
-    Light* light = Light::CreateFromXMLNode(node);
-    if (!light)
-    {
-        return;
-    }
-    if (scene->m_Light)
-    {
-        delete scene->m_Light;
-    }
-    scene->m_Light = light;
 }

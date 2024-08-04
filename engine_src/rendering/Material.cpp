@@ -1,7 +1,6 @@
 #include "rendering/Material.h"
 #include "interface/Debug.h"
 #include "Resources.h"
-#include "Utils.h"
 
 #include <string>
 #include <fstream>

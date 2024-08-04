@@ -2,11 +2,11 @@
 #include "components/Component.h"
 #include "rendering/Mesh.h"
 #include "rendering/Material.h"
-#include "rendering/Renderable.h"
+#include "components/Renderable.h"
 
 class Renderer;
 
-class MeshRender : public Component, public Renderable
+class MeshRender : public Renderable
 {
 private:
     Mesh* m_Mesh;
@@ -16,8 +16,6 @@ public:
     MeshRender() = default;
     MeshRender(Mesh* mesh, Material* material);
 
-    virtual void GetSubmitted() override;
-    virtual void GetUnSubmitted() override;
     virtual void Update() {};
 
     inline Mesh* GetMesh() { return m_Mesh; }

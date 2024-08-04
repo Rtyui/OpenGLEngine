@@ -31,6 +31,9 @@ public:
     void Update();
     void PushLine(const std::string& text, const glm::vec3 color = { 1.f, 1.f, 1.f });
 
+    inline const bool IsShown() const { return m_Show; }
+    inline const Entity* GetInputRow() const { return m_InputRow; }
+
 private:
 
     Console();
