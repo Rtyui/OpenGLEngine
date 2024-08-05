@@ -35,7 +35,13 @@
     <Entity name="Entity4">
         <Transform position="0 300 0" rotation="0 0 0" scale="800 63 1" ui="1"/>
         <SpriteRender sprite="white" color="0 1 0 0.1"/>
-        <TextRender input="1" wrapLines="0" font="dialog" color="1 1 0"/>
+        <InputTextRender font="dialog" color="1 1 0"/>
     </Entity>
+    
+    <!--<Entity name="Text">
+        <Transform position="0 600 0" rotation="0 0 0" scale="800 126 1" ui="1"/>
+        <SpriteRender sprite="white" color="0 1 0 0.1"/>
+        <TextRender text="Ana are mere pere prune mere cacat pisat unt mazga pateu, maini taieti picioari taieti" wrapLines="1" font="dialog" color="1 1 0" fontSize="34"/>
+    </Entity>-->
 
 </Scene>

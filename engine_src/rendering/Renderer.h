@@ -1,8 +1,8 @@
 #pragma once
 #include "components/Renderable.h"
 #include "components/MeshRender.h"
-#include "components/SpriteRender.h"
-#include "components/TextRender.h"
+#include "ui/components/SpriteRender.h"
+#include "ui/components/InputTextRender.h"
 
 #include <unordered_map>
 #include <vendor/glm/glm.hpp>

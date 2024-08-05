@@ -34,9 +34,9 @@ public:
     inline bool HasPositionChanged() const { return m_PositionChanged; }
     inline bool HasRotationChanged() const { return m_RotationChanged; }
 
-    const glm::vec3 GetPosition() const { return m_Position; };
-    const glm::vec3 GetRotation() const { return m_Rotation; };
-    const glm::vec3 GetScale() const { return m_Scale; };
+    inline const glm::vec3 GetPosition() const { return m_Position; };
+    inline const glm::vec3 GetRotation() const { return m_Rotation; };
+    inline const glm::vec3 GetScale() const { return m_Scale; };
 
     void IncreasePosition(glm::vec3 delta);
     void IncreaseRotation(glm::vec3 delta);

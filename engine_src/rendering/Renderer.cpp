@@ -321,16 +321,17 @@ void Renderer::DrawText(RenderCacheData& layer)
     textCursorShader->Bind();
     for (TextRender* textRender : layer.textRenderCache)
     {
-        if (!textRender->IsInput() || !textRender->DoRenderCursor() || !textRender->IsActive())
+        InputTextRender* inputTextRender = dynamic_cast<InputTextRender*>(textRender);
+        if (!inputTextRender || !inputTextRender->DoRenderCursor() || !textRender->IsActive())
         {
             continue;
         }
-
-        mesh = textRender->GetCursorMesh();
+        mesh = inputTextRender->GetCursorMesh();
         mesh->Bind();
         textCursorShader->SetUniform3fv("u_Color", textRender->GetColor());
-        textCursorShader->SetUniformMat4f("u_TransformationMatrix", textRender->GetEntity()->GetTransform()->GetNoScaleTM());
+        textCursorShader->SetUniformMat4f("u_TransformationMatrix", textRender->GetEntity()->GetTransform()->GetNoScaleTM() * inputTextRender->GetCursorTransform());
         glDrawElements(GL_TRIANGLES, mesh->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
     }
 }
 

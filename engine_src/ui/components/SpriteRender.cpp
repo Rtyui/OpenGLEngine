@@ -1,4 +1,4 @@
-#include "components/SpriteRender.h"
+#include "ui/components/SpriteRender.h"
 #include "Resources.h"
 #include "interface/Debug.h"
 #include "rendering/Renderer.h"

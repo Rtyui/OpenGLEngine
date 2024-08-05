@@ -93,7 +93,7 @@
     <ClCompile Include="engine_src\components\ComponentsFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine_src\components\SpriteRender.cpp">
+    <ClCompile Include="engine_src\ui\components\SpriteRender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine_src\components\Transform.cpp">
@@ -105,7 +105,7 @@
     <ClCompile Include="engine_src\ui\primitives\Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine_src\components\TextRender.cpp">
+    <ClCompile Include="engine_src\ui\components\TextRender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine_src\interface\events\EventListener.cpp">
@@ -139,6 +139,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine_src\utils\XMLUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine_src\ui\components\InputTextRender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1485,7 +1488,7 @@
     <ClInclude Include="engine_src\components\ComponentsFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine_src\components\SpriteRender.h">
+    <ClInclude Include="engine_src\ui\components\SpriteRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\components\Transform.h">
@@ -1497,7 +1500,7 @@
     <ClInclude Include="engine_src\ui\primitives\Font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine_src\components\TextRender.h">
+    <ClInclude Include="engine_src\ui\components\TextRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\interface\events\EventListener.h">
@@ -1531,6 +1534,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine_src\utils\XMLUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine_src\ui\components\InputTextRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

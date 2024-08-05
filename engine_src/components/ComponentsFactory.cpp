@@ -1,8 +1,9 @@
 #include "components/ComponentsFactory.h"
 #include "components/Transform.h"
 #include "components/MeshRender.h"
-#include "components/SpriteRender.h"
-#include "components/TextRender.h"
+#include "ui/components/SpriteRender.h"
+#include "ui/components/TextRender.h"
+#include "ui/components/InputTextRender.h"
 #include "components/Camera.h"
 #include "components/Light.h"
 #include "interface/Debug.h"
@@ -13,6 +14,7 @@ std::unordered_map<std::string, Component::ComponentXMLCreator> ComponentsFactor
     {"MeshRender", MeshRender::CreateFromXMLNode},
     {"SpriteRender", SpriteRender::CreateFromXMLNode},
     {"TextRender", TextRender::CreateFromXMLNode},
+    {"InputTextRender", InputTextRender::CreateFromXMLNode},
     {"Camera", Camera::CreateFromXMLNode},
     {"Light", Light::CreateFromXMLNode}
 };

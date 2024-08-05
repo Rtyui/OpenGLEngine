@@ -156,9 +156,10 @@
     <ClCompile Include="engine_src\interface\events\Event.cpp" />
     <ClCompile Include="engine_src\interface\events\EventListener.cpp" />
     <ClCompile Include="engine_src\interface\events\WindowSizeEvent.cpp" />
+    <ClCompile Include="engine_src\ui\components\InputTextRender.cpp" />
     <ClCompile Include="engine_src\ui\primitives\Font.cpp" />
     <ClCompile Include="engine_src\ui\primitives\FontCharacter.cpp" />
-    <ClCompile Include="engine_src\components\SpriteRender.cpp" />
+    <ClCompile Include="engine_src\ui\components\SpriteRender.cpp" />
     <ClCompile Include="engine_src\components\ComponentsFactory.cpp" />
     <ClCompile Include="engine_src\entities\Scene.cpp" />
     <ClCompile Include="engine_src\components\MeshRender.cpp" />
@@ -186,7 +187,7 @@
     <ClCompile Include="engine_src\rendering\internal\VertexArray.cpp" />
     <ClCompile Include="engine_src\rendering\internal\VertexBuffer.cpp" />
     <ClCompile Include="engine_src\components\Transform.cpp" />
-    <ClCompile Include="engine_src\components\TextRender.cpp" />
+    <ClCompile Include="engine_src\ui\components\TextRender.cpp" />
     <ClCompile Include="engine_src\components\Renderable.cpp" />
     <ClCompile Include="engine_src\utils\XMLUtils.cpp" />
   </ItemGroup>
@@ -343,9 +344,10 @@
     <ClInclude Include="engine_src\interface\events\Event.h" />
     <ClInclude Include="engine_src\interface\events\EventListener.h" />
     <ClInclude Include="engine_src\interface\events\WindowSizeEvent.h" />
+    <ClInclude Include="engine_src\ui\components\InputTextRender.h" />
     <ClInclude Include="engine_src\ui\primitives\Font.h" />
     <ClInclude Include="engine_src\ui\primitives\FontCharacter.h" />
-    <ClInclude Include="engine_src\components\SpriteRender.h" />
+    <ClInclude Include="engine_src\ui\components\SpriteRender.h" />
     <ClInclude Include="engine_src\components\ComponentsFactory.h" />
     <ClInclude Include="engine_src\entities\Scene.h" />
     <ClInclude Include="engine_src\components\MeshRender.h" />
@@ -657,7 +659,7 @@
     <ClInclude Include="engine_src\rendering\internal\VertexBuffer.h" />
     <ClInclude Include="engine_src\rendering\internal\VertexBufferLayout.h" />
     <ClInclude Include="engine_src\components\Transform.h" />
-    <ClInclude Include="engine_src\components\TextRender.h" />
+    <ClInclude Include="engine_src\ui\components\TextRender.h" />
     <ClInclude Include="engine_src\components\Renderable.h" />
   </ItemGroup>
   <ItemGroup>

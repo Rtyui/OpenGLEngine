@@ -1,4 +1,2 @@
-﻿  Camera.cpp
-  Light.cpp
-  Generating Code...
+﻿  Renderer.cpp
   OpenGLEngine.vcxproj -> S:\Projects\OpenGLEngine\Debug\OpenGLEngine.exe

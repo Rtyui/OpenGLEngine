@@ -1,7 +1,7 @@
 #include "interface/Console.h"
 #include "components/Transform.h"
-#include "components/TextRender.h"
-#include "components/SpriteRender.h"
+#include "ui/components/TextRender.h"
+#include "ui/components/SpriteRender.h"
 #include "interface/Display.h"
 #include "Resources.h"
 #include "rendering/Renderer.h"
@@ -19,10 +19,10 @@ Console::Console() :
     m_Font = Resources::Singleton()->GetFont("dialog");
     m_RowHeight = (float)Display::Singleton()->GetHeight() / NUM_ROWS;
 
-    CreateBackground();
-    CreateTextRows();
+    //CreateBackground();
+    //CreateTextRows();
 
-    UpdateShow();
+    //UpdateShow();
 }
 
 Console::~Console()
@@ -104,7 +104,7 @@ void Console::UpdateShow()
     m_InputRow->SetActive(m_Show);
     m_Background->SetActive(m_Show);
 
-    m_InputRow->GetComponent<TextRender>()->SetSelected(m_Show);
+    //m_InputRow->GetComponent<TextRender>()->SetSelected(m_Show);
 }
 
 void Console::UpdateEntities()
