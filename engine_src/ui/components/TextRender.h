@@ -35,7 +35,7 @@ public:
 
 
     virtual void Update() override;
-    void SetText(const std::string& text);
+    virtual void SetText(const std::string& text);
     void SetColor(const glm::vec3& color);
 
     inline const glm::vec3& GetColor() { return m_Color; }
@@ -56,13 +56,13 @@ protected:
     bool AddCharacter(std::vector<float>& vertices, std::vector<unsigned>& indices, const char& c, const unsigned& lineIndex, const unsigned& m_MeshIndex, float& cursor);
 
     virtual void InitTextParams(const glm::vec3& size, unsigned& maxCharCount);
+    float GetTextSize(const std::string& text);
 private:
 
     TextRender(Font* font, const unsigned& fontSize, const glm::vec3& color, const bool& wrapLines, const glm::vec3& size, const std::string& text);
 
     void FillMesh();
     std::vector<std::string> GetTextLines();
-    float GetWordSize(const std::string& word);
 
 };
 

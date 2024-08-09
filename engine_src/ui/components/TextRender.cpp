@@ -145,6 +145,20 @@ void TextRender::InitTextParams(const glm::vec3& size, unsigned& maxCharCount)
     maxCharCount = (unsigned)(m_MaxLineSize / (m_Font->GetSmallestCharSize() * m_FontScale));
 }
 
+float TextRender::GetTextSize(const std::string& text)
+{
+    float size = 0.f;
+    FontCharacter* fontCharacter;
+
+    for (char c : text)
+    {
+        fontCharacter = m_Font->GetCharacter(c);
+        size += fontCharacter->m_Advance * m_FontScale;
+    }
+
+    return size;
+}
+
 void TextRender::FillMesh()
 {
     std::vector<float> vertices;
@@ -152,6 +166,11 @@ void TextRender::FillMesh()
     unsigned i = 0;
     unsigned meshIndex = 0;
     float cursor = 0.f;
+
+    if (!m_Text[0])
+    {
+        return;
+    }
 
     if (m_WrapLines && (m_MaxLinesNumber > 1))
     {
@@ -213,7 +232,7 @@ std::vector<std::string> TextRender::GetTextLines()
 
         while ((word[0] != 0) || textSS >> word)
         {
-            wordSize = GetWordSize(word);
+            wordSize = GetTextSize(word);
             if ((currentLineSize + wordSize + spaceAdvance) > m_MaxLineSize)
             {
                 break;
@@ -225,20 +244,6 @@ std::vector<std::string> TextRender::GetTextLines()
         }
     }
     return lines;
-}
-
-float TextRender::GetWordSize(const std::string& word)
-{
-    float size = 0.f;
-    FontCharacter* fontCharacter;
-
-    for (char c : word)
-    {
-        fontCharacter = m_Font->GetCharacter(c);
-        size += fontCharacter->m_Advance * m_FontScale;
-    }
-
-    return size;
 }
 
 Component* TextRender::CreateFromXMLNode(const pugi::xml_node& node, Entity* entity)

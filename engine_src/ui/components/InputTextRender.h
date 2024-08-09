@@ -26,6 +26,7 @@ public:
     ~InputTextRender();
 
     virtual void Update() override;
+    virtual void SetText(const std::string& text) override;
     void SetSelected(const bool& selected);
 
     inline Mesh* GetCursorMesh() const { return m_CursorMesh; }
@@ -37,7 +38,7 @@ public:
     virtual void HandleEvent(MouseButtonEvent* mouseButtonEvent) override;
 
     static Component* CreateFromXMLNode(const pugi::xml_node& node, Entity* entity);
-    static Component* Create(Font* font, const unsigned& fontSize, const glm::vec3& color, const glm::vec3& size);
+    static Component* Create(Font* font, const glm::vec3& color, const glm::vec3& size);
 
 protected:
 
@@ -51,7 +52,6 @@ private:
 
     void CreateCursorMesh();
     void UpdateCursorTM(const unsigned& lineIndex);
-    //void UpdateMeshTextCursor(const unsigned& lineIndex);
     void UpdateCursorAnimation();
 
 };

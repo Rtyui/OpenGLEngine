@@ -54,6 +54,13 @@ void InputTextRender::Update()
     UpdateCursorAnimation();
 }
 
+void InputTextRender::SetText(const std::string& text)
+{
+    TextRender::SetText(text);
+    m_Cursor = InputTextRender::GetTextSize(text);
+    UpdateCursorTM(0);
+}
+
 void InputTextRender::SetSelected(const bool& selected)
 {
     if (m_Selected == selected)
@@ -243,7 +250,7 @@ Component* InputTextRender::CreateFromXMLNode(const pugi::xml_node& node, Entity
     return new InputTextRender(font, color, transform->GetScale());
 }
 
-Component* InputTextRender::Create(Font* font, const unsigned& fontSize, const glm::vec3& color, const glm::vec3& size)
+Component* InputTextRender::Create(Font* font, const glm::vec3& color, const glm::vec3& size)
 {
     return new InputTextRender(font, color, size);
 }

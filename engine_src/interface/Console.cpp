@@ -1,6 +1,6 @@
 #include "interface/Console.h"
 #include "components/Transform.h"
-#include "ui/components/TextRender.h"
+#include "ui/components/InputTextRender.h"
 #include "ui/components/SpriteRender.h"
 #include "interface/Display.h"
 #include "Resources.h"
@@ -19,10 +19,10 @@ Console::Console() :
     m_Font = Resources::Singleton()->GetFont("dialog");
     m_RowHeight = (float)Display::Singleton()->GetHeight() / NUM_ROWS;
 
-    //CreateBackground();
-    //CreateTextRows();
+    CreateBackground();
+    CreateTextRows();
 
-    //UpdateShow();
+    UpdateShow();
 }
 
 Console::~Console()
@@ -55,9 +55,26 @@ void Console::HandleEvent(KeyEvent* keyEvent)
     if ((keyEvent->GetKey() == GLFW_KEY_ENTER) && (keyEvent->GetAction() == GLFW_PRESS) && !keyEvent->GetMods())
     {
         TextRender* textRender = m_InputRow->GetComponent<TextRender>();
-        //PushLine(textRender->GetText());
         ConsoleCommands::ExecuteCommand(textRender->GetText());
         textRender->SetText("");
+        return;
+    }
+
+    if ((keyEvent->GetKey() == GLFW_KEY_TAB) && (keyEvent->GetAction() == GLFW_PRESS) && !keyEvent->GetMods())
+    {
+        TextRender* textRender = m_InputRow->GetComponent<TextRender>();
+        std::vector<ConsoleCommands::ConsoleCommand> commands = ConsoleCommands::GetCommandsWithPrefix(textRender->GetText());
+
+        if (commands.size() == 1)
+        {
+            textRender->SetText(commands[0].m_Command);
+        }
+
+        for (ConsoleCommands::ConsoleCommand command : commands)
+        {
+            PushLine(command.m_CommandUsage);
+
+        }
     }
 }
 
@@ -104,7 +121,7 @@ void Console::UpdateShow()
     m_InputRow->SetActive(m_Show);
     m_Background->SetActive(m_Show);
 
-    //m_InputRow->GetComponent<TextRender>()->SetSelected(m_Show);
+    m_InputRow->GetComponent<InputTextRender>()->SetSelected(m_Show);
 }
 
 void Console::UpdateEntities()
@@ -174,7 +191,7 @@ void Console::CreateTextRows()
     transform = static_cast<Transform*>(Transform::Create(glm::vec3(0.f, (NUM_ROWS - 1) * m_RowHeight, 0.f), glm::vec3(0.f), glm::vec3(displayWidth, m_RowHeight, 1.f), true));
     m_InputRow->AddComponent(transform);
 
-    textRender = static_cast<TextRender*>(TextRender::Create(m_Font, 0, glm::vec3(1.f, 1.f, 1.f), true, false, transform->GetScale(), ""));
+    textRender = static_cast<InputTextRender*>(InputTextRender::Create(m_Font, glm::vec3(1.f, 1.f, 1.f), transform->GetScale()));
     m_InputRow->AddComponent(textRender);
 
     Renderer::Singleton()->Submit(static_cast<Renderable*>(textRender));
