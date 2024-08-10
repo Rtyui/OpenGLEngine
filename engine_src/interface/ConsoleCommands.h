@@ -21,7 +21,7 @@ private:
 
 public:
 
-    static void ExecuteCommand(const std::string& command);
+    static bool ExecuteCommand(const std::string& command);
     static std::vector<ConsoleCommand> GetCommandsWithPrefix(const std::string& prefix);
 
     static void PrintScene(const std::string& params);

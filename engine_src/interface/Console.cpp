@@ -9,7 +9,7 @@
 #include "interface/Debug.h"
 #include "interface/ConsoleCommands.h"
 
-const unsigned Console::NUM_ROWS = 30;
+const unsigned Console::NUM_ROWS = 60;
 const unsigned Console::HISTORY_SIZE = 10;
 Console* Console:: s_Console = nullptr;
 
@@ -56,12 +56,15 @@ void Console::HandleEvent(KeyEvent* keyEvent)
     if ((keyEvent->GetKey() == GLFW_KEY_ENTER) && (keyEvent->GetAction() == GLFW_PRESS) && !keyEvent->GetMods())
     {
         TextRender* textRender = m_InputRow->GetComponent<TextRender>();
-        ConsoleCommands::ExecuteCommand(textRender->GetText());
-        for (unsigned i = (HISTORY_SIZE - 1); i > 0; --i)
+        bool success = ConsoleCommands::ExecuteCommand(textRender->GetText());
+        if (success)
         {
-            m_History[i] = m_History[i - 1];
+            for (unsigned i = (HISTORY_SIZE - 1); i > 0; --i)
+            {
+                m_History[i] = m_History[i - 1];
+            }
+            m_History[0] = textRender->GetText();
         }
-        m_History[0] = textRender->GetText();
         textRender->SetText("");
         m_HistoryIndex = -1;
         return;
@@ -105,6 +108,11 @@ void Console::HandleEvent(KeyEvent* keyEvent)
     if ((keyEvent->GetKey() == GLFW_KEY_DOWN) && (keyEvent->GetAction() == GLFW_PRESS) && !keyEvent->GetMods())
     {
         TextRender* textRender = m_InputRow->GetComponent<TextRender>();
+
+        if (m_HistoryIndex < 0)
+        {
+            return;
+        }
 
         if (m_HistoryIndex == 0)
         {

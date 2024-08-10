@@ -7,3 +7,5 @@
 *.exe
 *.log
 *.obj
+*.txt
+*.recipe

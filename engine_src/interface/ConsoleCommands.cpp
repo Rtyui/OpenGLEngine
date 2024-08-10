@@ -11,18 +11,19 @@ std::vector<ConsoleCommands::ConsoleCommand> ConsoleCommands::s_ConsoleCommands 
     { "rotate", "rotate <entity> <vec3:angle>", ConsoleCommands::RotateEntity}
 };
 
-void ConsoleCommands::ExecuteCommand(const std::string& command)
+bool ConsoleCommands::ExecuteCommand(const std::string& command)
 {
     for (ConsoleCommand consoleCommand : ConsoleCommands::s_ConsoleCommands)
     {
         if (!command.compare(0, consoleCommand.m_Command.length(), consoleCommand.m_Command))
         {
             consoleCommand.m_Func(command.substr(consoleCommand.m_Command.length(), std::string::npos));
-            return;
+            return true;
         }
     }
 
     UnknownCommandAction();
+    return false;
 }
 
 std::vector<ConsoleCommands::ConsoleCommand> ConsoleCommands::GetCommandsWithPrefix(const std::string& prefix)
