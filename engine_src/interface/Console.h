@@ -12,6 +12,7 @@ class Console : public EventListener
 private:
 
     static const unsigned NUM_ROWS;
+    static const unsigned HISTORY_SIZE;
     static Console* s_Console;
 
     std::vector<Entity*> m_Rows;
@@ -22,6 +23,9 @@ private:
     float m_RowHeight;
 
     bool m_Show;
+
+    std::vector<std::string> m_History;
+    int m_HistoryIndex;
 
 public:
 

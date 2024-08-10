@@ -10,11 +10,12 @@
 #include "interface/ConsoleCommands.h"
 
 const unsigned Console::NUM_ROWS = 30;
+const unsigned Console::HISTORY_SIZE = 10;
 Console* Console:: s_Console = nullptr;
 
 
 Console::Console() :
-    EventListener(Event::EventType::KeyEvent), m_Show(false)
+    EventListener(Event::EventType::KeyEvent), m_Show(false), m_HistoryIndex(-1), m_History(HISTORY_SIZE)
 {
     m_Font = Resources::Singleton()->GetFont("dialog");
     m_RowHeight = (float)Display::Singleton()->GetHeight() / NUM_ROWS;
@@ -56,7 +57,13 @@ void Console::HandleEvent(KeyEvent* keyEvent)
     {
         TextRender* textRender = m_InputRow->GetComponent<TextRender>();
         ConsoleCommands::ExecuteCommand(textRender->GetText());
+        for (unsigned i = (HISTORY_SIZE - 1); i > 0; --i)
+        {
+            m_History[i] = m_History[i - 1];
+        }
+        m_History[0] = textRender->GetText();
         textRender->SetText("");
+        m_HistoryIndex = -1;
         return;
     }
 
@@ -75,6 +82,39 @@ void Console::HandleEvent(KeyEvent* keyEvent)
             PushLine(command.m_CommandUsage);
 
         }
+    }
+
+    if ((keyEvent->GetKey() == GLFW_KEY_UP) && (keyEvent->GetAction() == GLFW_PRESS) && !keyEvent->GetMods())
+    {
+        TextRender* textRender = m_InputRow->GetComponent<TextRender>();
+
+        if (m_HistoryIndex == (HISTORY_SIZE - 1))
+        {
+            return;
+        }
+
+        if (!m_History[m_HistoryIndex + 1][0])
+        {
+            return;
+        }
+
+        ++m_HistoryIndex;
+        textRender->SetText(m_History[m_HistoryIndex]);
+    }
+
+    if ((keyEvent->GetKey() == GLFW_KEY_DOWN) && (keyEvent->GetAction() == GLFW_PRESS) && !keyEvent->GetMods())
+    {
+        TextRender* textRender = m_InputRow->GetComponent<TextRender>();
+
+        if (m_HistoryIndex == 0)
+        {
+            textRender->SetText("");
+            m_HistoryIndex = -1;
+            return;
+        }
+
+        --m_HistoryIndex;
+        textRender->SetText(m_History[m_HistoryIndex]);
     }
 }
 

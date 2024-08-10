@@ -1,12 +1,14 @@
 #include "interface/ConsoleCommands.h"
 #include "interface/Debug.h"
 #include "entities/Scene.h"
+#include "components/Transform.h"
 
 #include <sstream>
 
 std::vector<ConsoleCommands::ConsoleCommand> ConsoleCommands::s_ConsoleCommands = {
     { "print current scene", "print current scene", ConsoleCommands::PrintScene},
-    { "print number", "print number <number>", ConsoleCommands::PrintNumber}
+    { "print number", "print number <number>", ConsoleCommands::PrintNumber},
+    { "rotate", "rotate <entity> <vec3:angle>", ConsoleCommands::RotateEntity}
 };
 
 void ConsoleCommands::ExecuteCommand(const std::string& command)
@@ -48,6 +50,24 @@ void ConsoleCommands::PrintNumber(const std::string& params)
     int number;
     stream >> number;
     Debug::Log(Debug::DebugLevel::Info, std::to_string(number));
+}
+
+void ConsoleCommands::RotateEntity(const std::string& params)
+{
+    std::istringstream stream(params);
+    std::string entityName;
+    glm::vec3 angle = glm::vec3(0.f);
+
+    stream >> entityName >> angle.x >> angle.y >> angle.z;
+
+    Entity* entity = Scene::GetCurrentScene()->GetEntity(entityName);
+    if (!entity)
+    {
+        Debug::LogConsole(Debug::DebugLevel::Warning, "Ivalid entity name " + entityName);
+        return;
+    }
+
+    entity->GetTransform()->IncreaseRotation(angle);
 }
 
 void ConsoleCommands::UnknownCommandAction(void)

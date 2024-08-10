@@ -26,6 +26,7 @@ public:
 
     static void PrintScene(const std::string& params);
     static void PrintNumber(const std::string& params);
+    static void RotateEntity(const std::string& params);
 
     static void UnknownCommandAction(void);
 };

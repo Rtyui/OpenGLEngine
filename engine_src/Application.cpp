@@ -31,7 +31,7 @@ int main(void)
         TimeClock::Singleton()->Update();
         Console::Singleton()->Update();
         Scene::GetCurrentScene()->Update();
-        Scene::GetCurrentScene()->GetEntity("Entity1")->GetTransform()->IncreaseRotation(glm::vec3(0.f, 10.f * TimeClock::Singleton()->GetDeltaTime(), 0.f));
+        //Scene::GetCurrentScene()->GetEntity("Entity1")->GetTransform()->IncreaseRotation(glm::vec3(0.f, 10.f * TimeClock::Singleton()->GetDeltaTime(), 0.f));
         //Scene::s_CurrentScene->GetEntity("Entity2")->GetTransform()->IncreaseRotation(10.f * TimeClock::GetDeltaTime());
         Renderer::Singleton()->Clear();
         Renderer::Singleton()->Draw();
